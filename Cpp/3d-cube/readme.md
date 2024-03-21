@@ -1,0 +1,1 @@
+#3d cube using simple if else and for loop statements
