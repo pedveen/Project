@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 function App() {
+
   const [btntext, setbtntext] = useState("Copy");
   const [password, setPassword] = useState("");
   const [symbolallow, setsymbolallow] = useState(true);
   const [numberallow, setnumberallow] = useState(true);
   const [length, setlength] = useState(10);
   const passref = useRef(null);
+
   const generatepassword = useCallback(() => {
     let pass=""
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -19,13 +21,16 @@ function App() {
     setbtntext("Copy");
     setPassword(pass);
   }, [length,symbolallow,numberallow,setPassword])
+
   const copypass = useCallback(() => {
     passref.current?.select();
     // passref.current?.setSelectionRange(0,4); //choose selection
     window.navigator.clipboard.writeText(password);
     setbtntext("Copied");
   },[password]);
+
   useEffect(()=> generatepassword(), [length,symbolallow,numberallow,generatepassword]);
+  
   return (
     <>
       <div className='w-full my-10 flex justify-center text-white'>
