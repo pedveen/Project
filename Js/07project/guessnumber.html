@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #212121; 
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <form class="bg-secondary rounded p-5 d-flex justify-content-center align-items-center flex-column">     
+            <h1 class="mb-5">Number Guessing Game</h1>
+            <div class="bg-dark rounded p-2">
+                <div class="h3 text-center">Guess a Number</div>
+                <h5 class="text-center"> ( 1 To 100 )</h5>
+                <input type="number" id="inputguess" class="form-control text-center">
+            </div>   
+            <input id="submit" type="submit" class="btn btn-primary my-3 px-5 py-3" value="Guess">
+            <div class="bg-dark rounded p-2 w-100">
+                <h5 id="prevguess">Previous Guesses: [ ]</h5>
+                <h5 id="remguess">Remining Guesses: 10</h5>
+                <div id="game" class="text-center h2"></div>
+                <h3 class="text-center" id="status"></h3>
+                <div id="newgame" class="text-center h2"></div>
+            </div>   
+    </form>
+</body>
+<script>
+    let number = parseInt(Math.random()*100+1);
+
+    const submit = document.querySelector('#submit');
+    const inputguess = document.querySelector("#inputguess");
+    const prevguess = document.querySelector("#prevguess");
+    const remguess = document.querySelector("#remguess");
+    const status = document.querySelector("#status");
+    const newgame = document.querySelector("#newgame");
+    const gamenumber = document.querySelector("#game"); 
+    let chance = 10;
+    let guessarray =[];
+    let startgame = true;
+    
+    submit.addEventListener("click", (e) => { 
+        e.preventDefault(); 
+        // document.querySelector("#game").innerHTML=number;
+        if (inputguess.value >=1 && inputguess.value <=100 && startgame) { 
+            if (number == inputguess.value) {
+                status.innerHTML = "Your Guess is correct"
+                newgame.innerHTML = "Start New Game"
+                startgame=false;
+            } else if (number > inputguess.value) {
+                status.innerHTML = "Guess number is to low"
+            } else if (number < inputguess.value) {
+                status.innerHTML = "Guess number is to high"
+            }     
+            guessarray.push(inputguess.value);
+            prevguess.innerHTML=`Previous Guesses: [ ${guessarray} ]`;
+            remguess.innerHTML= `Remining Guesses: ${--chance}`;            
+            if (chance === 0) {
+                newgame.innerHTML = "Start New Game"
+                startgame=false; 
+                gamenumber.innerHTML=`Number is ${number}`;
+            }
+        }
+    })
+    newgame.addEventListener("click", () => {
+        number = parseInt(Math.random()*100+1);
+        chance=10;
+        guessarray =[];
+        startgame=true;
+        newgame.innerHTML = "";
+        status.innerHTML = "";
+        inputguess.value = null;
+        prevguess.innerHTML=`Previous Guesses: [ ${guessarray} ]`;
+        remguess.innerHTML= `Remining Guesses: ${chance}`; 
+        gamenumber.innerHTML="";
+    });
+</script>
+</html>

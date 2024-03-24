@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            /* height: 100vw; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn{
+            height: 50px;
+            width: 50px;
+            /* border: 5px dotted black; */
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10%;
+        }
+        #red{
+            background-color: red;
+        }
+        #green{
+            background-color: green;
+        }
+        #blue{
+            background-color: blue;
+        }
+        #yellow{
+            background-color: yellow;
+        }
+        .btn:hover{
+            height: 60px;
+            width: 60px;
+            transition: 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="btn" id="red"></div>
+        <div class="btn" id="blue"></div>
+        <div class="btn" id="green"></div>
+        <div class="btn" id="yellow"></div>
+    </div>
+</body>
+<script>
+    const body = document.querySelector("body");
+    const btn = document.querySelectorAll(".btn");
+    
+    btn.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+            body.style.backgroundColor = e.target.id;
+        });
+    });
+    
+    
+</script>
+</html>
